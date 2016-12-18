@@ -126,7 +126,7 @@ Command line parsers can accept an optional description argument, which will be 
 Command line parsers can optionally either be subclassed or have this function overridden to modify the argparse.ArgumentParser used to accept command-line arguments.  This function should accept two parameters, the first being the ConfigManager object the subparser is registered to, and the second being the Config object which has been constructed thus far.  It should return a single argument, being the argparse.ArgumentParser that the subparser should use to parse arguments from the command line.
 
 Note that any arguments registered with underscores will have them converted to dashes when accepting commandline arguments.
-For example, a configuration registered with the name "start_time" will be accepted from the command line as "--start-time".
+For example, a configuration registered with the name `start_time` will be accepted from the command line as `--start-time`.
 ```
 cmdlineSubparser = hconf.Subparsers.Cmdline("Program Description")
 ```
