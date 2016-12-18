@@ -12,6 +12,8 @@ Alternatively, hconf can be installed manually by cloning this repo and running 
 
 `python setup.py install`
 
+Note: hconf requires setuptools and PyYAML (which will be installed automatically).
+
 ## Example
 ```
 >>> import hconf
