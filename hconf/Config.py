@@ -81,8 +81,7 @@ class ConfigManager(object):
                 cast        - A type (or function accepting 1 argument and returning an object) to cast the input as.
                               If any error occurs during casting an InvalidConfigurationException will be raised.
                 default     - The default value to assign to this configuration option.  Note that None is not a valid
-                              default.  If a non-required configuration option is not passed it will be assigned a None
-                              value by default.
+                              default if required=True.
                 description - A human readable description of this configuration parameter.  Will be displayed when the
                               program is run with a -h flag.
         """

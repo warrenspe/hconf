@@ -23,6 +23,7 @@ from .dictionary import Dictionary
 from .ini import INI
 from .json_ import JSON
 from .yaml_ import YAML
+from ._subparser import Subparser, ConfigFileSubparser
 
 __all__ = [
     'Cmdline'
@@ -30,4 +31,6 @@ __all__ = [
     'INI',
     'JSON',
     'YAML',
+    'Subparser',
+    'ConfigFileSubparser',
 ]
