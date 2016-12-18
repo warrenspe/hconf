@@ -12,7 +12,7 @@ Alternatively, hconf can be installed manually by cloning this repo and running 
 
 `python setup.py install`
 
-Note: hconf requires setuptools and PyYAML (which will be installed automatically).
+Note: hconf requires 	[setuptools](https://pypi.python.org/pypi/setuptools) and [PyYAML](https://pypi.python.org/pypi/PyYAML) (the latter of which will be installed automatically).
 
 ## Example
 ```
