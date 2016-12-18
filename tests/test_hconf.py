@@ -37,14 +37,14 @@ class HConfTests(tests.HConfTestCase):
         self.assertTrue(self.configManager.configs['test']['required'])
 
     def testRegisteringParsers(self):
-        self.configManager.registerParser(hconf.subparsers.Cmdline())
-        self.assertRaises(TypeError, self.configManager.registerParser, hconf.subparsers.Cmdline)
+        self.configManager.registerParser(hconf.Subparsers.Cmdline())
+        self.assertRaises(TypeError, self.configManager.registerParser, hconf.Subparsers.Cmdline)
 
         self.assertEqual(len(self.configManager.parsers), 1)
 
     def testOverridingConfigurations(self):
-        self.configManager.registerParser(hconf.subparsers.Dictionary({'a': 0}))
-        self.configManager.registerParser(hconf.subparsers.Cmdline())
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({'a': 0}))
+        self.configManager.registerParser(hconf.Subparsers.Cmdline())
         self.configManager.addConfig('a', cast=int)
 
         self.assertEqual(self.configManager.parse()['a'], 0)
@@ -55,28 +55,28 @@ class HConfTests(tests.HConfTestCase):
         self.assertEqual(self.configManager.parse()['a'], 0)
 
     def testParsingUnknownConfigurations(self):
-        self.configManager.registerParser(hconf.subparsers.Dictionary({'a': 0}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({'a': 0}))
         self.assertRaises(hconf.Exceptions.UnknownConfigurationException, self.configManager.parse)
 
     def testDefaultConfigurations(self):
-        self.configManager.registerParser(hconf.subparsers.Dictionary({}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({}))
         self.configManager.addConfig('a', default=1)
         self.assertEqual(self.configManager.parse()['a'], 1)
 
     def testCastingConfigurations(self):
-        self.configManager.registerParser(hconf.subparsers.Dictionary({'a': (1, 2, 3)}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({'a': (1, 2, 3)}))
         self.configManager.addConfig('a', cast=list)
         self.assertIsInstance(self.configManager.parse()['a'], list)
         self.configManager.addConfig('b', cast=int)
-        self.configManager.registerParser(hconf.subparsers.Dictionary({'b': 'c'}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({'b': 'c'}))
         self.assertRaises(hconf.Exceptions.InvalidConfigurationException, self.configManager.parse)
 
     def testRequiredCongfigurations(self):
-        self.configManager.registerParser(hconf.subparsers.Dictionary({}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({}))
         self.configManager.addConfig('a', required=True)
         self.assertRaises(hconf.Exceptions.MissingConfigurationException, self.configManager.parse)
 
-        self.configManager.registerParser(hconf.subparsers.Dictionary({'a': 1}))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary({'a': 1}))
         self.assertEqual(self.configManager.parse()['a'], 1)
 
         self.configManager.addConfig('b', required=True, default=1)

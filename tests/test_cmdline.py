@@ -32,7 +32,7 @@ class CmdlineSubparserTests(tests.HConfTestCase):
         self.configManager = hconf.ConfigManager()
 
     def testParsingCmdlineArguments(self):
-        self.configManager.registerParser(hconf.subparsers.Cmdline())
+        self.configManager.registerParser(hconf.Subparsers.Cmdline())
         self.configManager.addConfig('a')
         self.configManager.addConfig('b', required=True)
         self.configManager.addConfig('c', cast=int)
@@ -73,7 +73,7 @@ class CmdlineSubparserTests(tests.HConfTestCase):
         self.configManager.addConfig('a')
         self.configManager.addConfig('b')
 
-        cmdlineParser = hconf.subparsers.Cmdline()
+        cmdlineParser = hconf.Subparsers.Cmdline()
         cmdlineParser.getArgumentParser = lambda *_: argParser
 
         self.configManager.registerParser(cmdlineParser)

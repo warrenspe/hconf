@@ -29,7 +29,7 @@ class DictionarySubparserTests(tests.HConfTestCase):
 
     def testParsingDictionaryArguments(self):
         inputDict = {'a': 1}
-        self.configManager.registerParser(hconf.subparsers.Dictionary(inputDict))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary(inputDict))
         self.configManager.addConfig('a')
         self.configManager.addConfig('b', required=True)
         self.configManager.addConfig('c', cast=int)
@@ -71,5 +71,5 @@ class DictionarySubparserTests(tests.HConfTestCase):
         self.assertEqual(vars(self.configManager.parse()),
                          {'a': [1, 2, 3], 'b': 2, 'c': None, 'd': 2, 'e': 5, 'f_g': 2, 'g_g': 2})
 
-        self.configManager.registerParser(hconf.subparsers.Dictionary([1, 2, 3]))
+        self.configManager.registerParser(hconf.Subparsers.Dictionary([1, 2, 3]))
         self.assertRaises(hconf.Exceptions.SubparserException, self.configManager.parse)

@@ -25,9 +25,9 @@ except ImportError:
     import configparser as ConfigParser
 
 # Project imports
-import _subparser
+from ._subparser import ConfigFileSubparser
 
-class INI(_subparser.ConfigFileSubparser):
+class INI(ConfigFileSubparser):
     """
     Subparser for parsing .ini configuration files.
     """

@@ -18,11 +18,11 @@
     Email:  warrenspencer27@gmail.com
 """
 
-from cmdline import Cmdline
-from dictionary import Dictionary
-from ini import INI
-from json_ import JSON
-from yaml_ import YAML
+from .cmdline import Cmdline
+from .dictionary import Dictionary
+from .ini import INI
+from .json_ import JSON
+from .yaml_ import YAML
 
 __all__ = [
     'Cmdline'

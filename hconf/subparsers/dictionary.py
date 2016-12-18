@@ -19,9 +19,9 @@
 """
 
 # Project imports
-import _subparser
+from ._subparser import Subparser
 
-class Dictionary(_subparser.Subparser):
+class Dictionary(Subparser):
     """
     Subparser for parsing Python-passed configuration options.
     """

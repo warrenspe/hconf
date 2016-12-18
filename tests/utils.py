@@ -24,8 +24,6 @@ try:
     import StringIO
 except ImportError:
     import configparser as ConfigParser
-    import io as StringIO
-    StringIO.StringIO = StringIO.BytesIO
 import yaml
 import sys, itertools, tempfile, os
 
@@ -37,7 +35,7 @@ class INIConfigContext(object):
 
     def __init__(self, d):
         self.d = d
-        self.fd = tempfile.NamedTemporaryFile()
+        self.fd = tempfile.NamedTemporaryFile(mode='w+')
         self.__class__.nameDict['path'], self.__class__.nameDict['name'] = os.path.split(self.fd.name)
 
     def __enter__(self):
@@ -46,7 +44,7 @@ class INIConfigContext(object):
             if sectionName != 'DEFAULT':
                 parser.add_section(sectionName)
                 for configName, configVal in sectionValues.items():
-                    parser.set(sectionName, configName, configVal)
+                    parser.set(sectionName, configName, str(configVal))
         parser.write(self.fd)
 
         self.fd.seek(0)
@@ -62,7 +60,7 @@ class YAMLConfigContext(object):
     nameDict = {'name': None, 'path': None}
 
     def __init__(self, d):
-        self.fd = tempfile.NamedTemporaryFile()
+        self.fd = tempfile.NamedTemporaryFile(mode='w+')
         self.__class__.nameDict['path'], self.__class__.nameDict['name'] = os.path.split(self.fd.name)
         self.d = d
 

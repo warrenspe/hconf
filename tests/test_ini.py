@@ -29,8 +29,8 @@ class INISubparserTests(tests.HConfTestCase):
         self.configManager = hconf.ConfigManager()
 
     def testParsingINIArguments(self):
-        iniParser = hconf.subparsers.INI(filepathConfig='path', filenameConfig='name')
-        self.configManager.registerParser(hconf.subparsers.Dictionary(utils.INIConfigContext.nameDict))
+        iniParser = hconf.Subparsers.INI(filepathConfig='path', filenameConfig='name')
+        self.configManager.registerParser(hconf.Subparsers.Dictionary(utils.INIConfigContext.nameDict))
         self.configManager.registerParser(iniParser)
         self.configManager.addConfig('name')
         self.configManager.addConfig('path')
@@ -72,7 +72,7 @@ class INISubparserTests(tests.HConfTestCase):
         with utils.INIConfigContext({'DEFAULT': {'e': 3, 'b': 2}, 'a': {'a': 1}, 'b': {'g_g': 5, 'f-g': 4}}) as fd:
             configManager2 = hconf.ConfigManager()
             configManager2.configs = self.configManager.configs
-            configManager2.registerParser(hconf.subparsers.INI(
+            configManager2.registerParser(hconf.Subparsers.INI(
                 filepath=utils.INIConfigContext.nameDict['path'],
                 filename=utils.INIConfigContext.nameDict['name']
             ))

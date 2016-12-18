@@ -22,9 +22,9 @@
 import yaml
 
 # Project imports
-import _subparser
+from ._subparser import ConfigFileSubparser
 
-class YAML(_subparser.ConfigFileSubparser):
+class YAML(ConfigFileSubparser):
     """
     Subparser for parsing .yaml & .yml configuration files.
     """

@@ -32,7 +32,7 @@ class JSONSubparserTests(tests.HConfTestCase):
 
     def testParsingJSONArguments(self):
         inputDict = {'a': 1}
-        jsonSubparser = hconf.subparsers.JSON(json.dumps(inputDict))
+        jsonSubparser = hconf.Subparsers.JSON(json.dumps(inputDict))
         self.configManager.registerParser(jsonSubparser)
         self.configManager.addConfig('a')
         self.configManager.addConfig('b', required=True)

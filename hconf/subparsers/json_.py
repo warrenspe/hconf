@@ -22,9 +22,9 @@
 import json
 
 # Project imports
-import _subparser
+from ._subparser import Subparser
 
-class JSON(_subparser.Subparser):
+class JSON(Subparser):
     """
     Subparser for parsing JSON strings.
     """

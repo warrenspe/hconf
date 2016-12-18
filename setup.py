@@ -33,7 +33,7 @@ setuptools.setup(
     download_url="https://github.com/warrenspe/%s/tarball/%s" % (NAME, VERSION),
     keywords=['configuration', 'config', 'hierarchical', 'cascade'],
     classifiers=[],
-    packages=['hconf', 'hconf.subparsers'],
+    packages=[NAME] + ["%s.%s" % (NAME, pkg) for pkg in setuptools.find_packages(NAME)],
     license="https://www.gnu.org/licenses/gpl-3.0.html",
     platforms=["Linux", "Windows"],
 

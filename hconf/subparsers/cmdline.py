@@ -22,9 +22,9 @@
 import argparse
 
 # Project imports
-import _subparser
+from ._subparser import Subparser
 
-class Cmdline(_subparser.Subparser):
+class Cmdline(Subparser):
     """
     Subparser for parsing cmdline inputs.
     """

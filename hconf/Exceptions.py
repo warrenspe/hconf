@@ -18,6 +18,9 @@
     Email:  warrenspencer27@gmail.com
 """
 
+# Project imports
+from .Subparsers._subparser import SubparserException
+
 __all__ = [
     'UnknownConfigurationException',
     'InvalidConfigurationException',
@@ -39,5 +42,3 @@ class MissingConfigurationException(Exception):
     """
     Raised when a required configuration option is not passed.
     """
-
-from subparsers._subparser import SubparserException

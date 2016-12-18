@@ -29,8 +29,8 @@ class YAMLSubparserTests(tests.HConfTestCase):
         self.configManager = hconf.ConfigManager()
 
     def testParsingYAMLArguments(self):
-        yamlParser = hconf.subparsers.YAML(filepathConfig='path', filenameConfig='name')
-        self.configManager.registerParser(hconf.subparsers.Dictionary(utils.YAMLConfigContext.nameDict))
+        yamlParser = hconf.Subparsers.YAML(filepathConfig='path', filenameConfig='name')
+        self.configManager.registerParser(hconf.Subparsers.Dictionary(utils.YAMLConfigContext.nameDict))
         self.configManager.registerParser(yamlParser)
         self.configManager.addConfig('name')
         self.configManager.addConfig('path')
@@ -55,7 +55,7 @@ class YAMLSubparserTests(tests.HConfTestCase):
         with utils.YAMLConfigContext({'a': 1, 'b': 2, 'e': 3, 'f-g': 1, 'g_g': 1}) as fd:
             configManager2 = hconf.ConfigManager()
             configManager2.configs = self.configManager.configs
-            configManager2.registerParser(hconf.subparsers.YAML(
+            configManager2.registerParser(hconf.Subparsers.YAML(
                 filepath=utils.YAMLConfigContext.nameDict['path'],
                 filename=utils.YAMLConfigContext.nameDict['name']
             ))

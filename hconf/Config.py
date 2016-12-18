@@ -22,9 +22,12 @@
 import re
 
 # Project imports
-import Exceptions
-import subparsers._subparser
+from .Exceptions import *
+from .Subparsers._subparser import Subparser
 
+__all__ = [
+    'ConfigManager',
+]
 
 class _Config(object):
     """
@@ -64,7 +67,7 @@ class ConfigManager(object):
         Registers a parser to parse configuration inputs.
         """
 
-        if not isinstance(parser, subparsers._subparser.Subparser):
+        if not isinstance(parser, Subparser):
             raise TypeError("%s is not an instance of a subparser." % parser)
 
         self.parsers.append(parser)
@@ -86,7 +89,7 @@ class ConfigManager(object):
 
         # Validate the name
         if not self.configNameRE.match(name):
-            raise Exceptions.InvalidConfigurationException("Invalid configuration name: %s" % name)
+            raise InvalidConfigurationException("Invalid configuration name: %s" % name)
 
         self.configs[self._sanitizeName(name)] = {
             'default': default,
@@ -108,7 +111,7 @@ class ConfigManager(object):
             for key, value in parser.parse(self, self._config).items():
                 key = self._sanitizeName(key)
                 if key not in self.configs:
-                    raise Exceptions.UnknownConfigurationException(key)
+                    raise UnknownConfigurationException(key)
                 if value is not None:
                     self._setConfig(key, value)
 
@@ -134,7 +137,7 @@ class ConfigManager(object):
         for configName, configDict in self.configs.items():
             if configDict['required']:
                 if getattr(self._config, configName) is None:
-                    raise Exceptions.MissingConfigurationException(configName)
+                    raise MissingConfigurationException(configName)
 
     def _cast(self):
         """
@@ -149,7 +152,7 @@ class ConfigManager(object):
                         self._setConfig(configName, configDict['cast'](configValue))
 
                     except:
-                        raise Exceptions.InvalidConfigurationException("%s: %r" % (configName, configValue))
+                        raise InvalidConfigurationException("%s: %r" % (configName, configValue))
 
     def _setConfig(self, name, value):
         """
