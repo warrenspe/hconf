@@ -136,7 +136,7 @@ class ConfigManager(object):
         for configName, configDict in self.configs.items():
             if configDict['required']:
                 if getattr(self._config, configName) is None:
-                    raise MissingConfigurationException(configName)
+                    raise MissingConfigurationException(self._desanitizeName(configName))
 
     def _cast(self):
         """
@@ -173,3 +173,14 @@ class ConfigManager(object):
         """
 
         return name.replace('-', '_')
+
+    def _desanitizeName(self, name):
+        """
+        Desanitizes a configuration name for displaying to the user. (ex: replacing _'s with -'s).
+
+        Inputs: name - The string containing the name to desanitize.
+
+        Outputs: A string containing the desanitized string.
+        """
+
+        return name.replace('_', '-')
