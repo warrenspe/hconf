@@ -26,8 +26,8 @@ Note: hconf requires 	[setuptools](https://pypi.python.org/pypi/setuptools) and 
 >>> configMgr.addConfig('action', required=True, default='list')
 
 >>> # Add parsers; configuration options will be acquired from them in order
->>> configMgr.addParser(hconf.Subparsers.Cmdline("Program -h description")
->>> configMgr.addParser(hconf.Subparsers.YAML(filename="program.cfg", filepath='/etc/program/conf')
+>>> configMgr.registerParser(hconf.Subparsers.Cmdline("Program -h description")
+>>> configMgr.registerParser(hconf.Subparsers.YAML(filename="program.cfg", filepath='/etc/program/conf')
 
 >>> # Parse configuration options into an object
 >>> config = configMgr.parse()
